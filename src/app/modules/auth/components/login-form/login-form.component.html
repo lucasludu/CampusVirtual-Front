@@ -1,0 +1,69 @@
+<form 
+    [formGroup]="form" 
+    novalidate 
+    class="max-w-sm mx-auto" 
+    (ngSubmit)="doLogin()"
+>
+
+    <!-- EMAIL -->
+    <div class="mb-5">
+        <input 
+            type="email" 
+            id="email"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="name@flowbite.com" 
+            #nameInput formControlName="email" />
+
+        @if(form.controls.email.touched && form.controls.email.invalid) {
+            @if(form.controls.email.hasError('required')) {
+                <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    Este campo es obligatorio
+                </p>
+            }
+            @if(form.controls.email.hasError('email')) {
+                <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    Este campo debe ser un correo electrónico.
+                </p>
+            }
+        }
+    </div>
+    <!-- EMAIL -->
+
+    <!-- PASSWORD -->
+    <div class="mb-5 relative">
+        <input 
+            type="password" 
+            id="password"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10" 
+            placeholder="Ingrese password"
+            formControlName="password" />
+
+        @if(form.controls.password.touched && form.controls.password.invalid) {
+            @if(form.controls.password.hasError('required')) {
+                <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    Este campo es obligatorio
+                </p>
+            }
+            @if(form.controls.password.hasError('minlength')) {
+                <p class="font-medium text-red-500 text-xs mt-1 ml-1"> 
+                    Este campo debe tener más de 8 caracteres.
+                </p>
+            }
+        }
+    </div>
+    <!-- PASSWORD -->
+
+    @if(status === 'failed') {
+        <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+            Credenciales Invalidas
+        </p>
+    }
+   
+    <!-- BUTTON -->
+    <button 
+        type="submit"
+        class="text-white sm:w-full font-medium text-sm px-5 py-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg w-full sm:w-auto text-center"
+    >Iniciar Sesión</button>
+    <!-- BUTTON -->
+
+</form>
